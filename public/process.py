@@ -19,7 +19,7 @@ with cur:
 	data = cur.fetchall()
 if len(row) > 100:
 	more = True
-else
+else:
 	more = False
 i = 0
 print "<ol>"
