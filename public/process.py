@@ -10,7 +10,7 @@ print 'Content-type: text/html\n'
 QS = os.environ['QUERY_STRING']
 qs = cgi.parse_qs(QS)
 
-title = qs['title']
+title = qs['title'][0]
 
 cur = conn.cursor()
 with cur:
