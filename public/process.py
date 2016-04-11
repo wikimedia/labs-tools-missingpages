@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#-*- coding: utf-8 -*-
 
 ##############################################
 #TODO: Work with non-ascii chars too
@@ -9,11 +10,23 @@ from wmflabs import db
 conn = db.connect("s52741__urbanecmbot")
 
 print 'Content-type: text/html\n'
-
+print """
+<!DOCTYPE html>
+<html lang="cs-cz">
+        <head>
+                <meta charset="utf-8" />
+                <title>Chybějící stránky</title>
+        </head>
+        <body>
+"""
 QS = os.environ['QUERY_STRING']
 qs = cgi.parse_qs(QS)
 
 title = qs['title'][0]
+
+cur = conn.cursor()
+with cur:
+	cur.execute("SET NAMES utf8;")
 
 cur = conn.cursor()
 with cur:
@@ -32,3 +45,8 @@ print "</ol>"
 if more:
 	pass
 	#TODO: Some logic for more than 100 rows
+
+print """
+        </body>
+</html>
+"""
