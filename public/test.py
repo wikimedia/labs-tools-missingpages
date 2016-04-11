@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 
-##############################################
-#TODO: Work with non-ascii chars too
-
 import cgi
 import os
 from wmflabs import db
@@ -10,10 +7,8 @@ conn = db.connect("s52741__urbanecmbot")
 
 print 'Content-type: text/html\n'
 
-QS = os.environ['QUERY_STRING']
-qs = cgi.parse_qs(QS)
 
-title = qs['title'][0]
+title = "A"
 
 cur = conn.cursor()
 with cur:
