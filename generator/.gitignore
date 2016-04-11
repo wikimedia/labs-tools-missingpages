@@ -1,0 +1,7 @@
+#Ignore generated files and symlink to dump
+cswiki-*-pages-articles.xml.bz2
+missl
+MISSLINK.txt
+NLINK.txt
+REDIRLIST.txt
+ROZCLIST.txt
