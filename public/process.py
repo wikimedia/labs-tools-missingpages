@@ -36,6 +36,7 @@ with cur:
 
 if len(data) == 0:
 	print '<p>Nebyly nalezeny žádné výsledky. <a href="index.html">Vraťte se</a> a zkuste jiný dotaz.'
+	quit()
 
 if len(data) > 100:
 	more = True
