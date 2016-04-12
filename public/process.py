@@ -51,10 +51,16 @@ i = 0
 print "<ol>"
 if whatlinkshere:
 	for row in data:
-		print "<li>" + row[0] + ' (<a href="https://cs.wikipedia.org/wiki/Special:WhatLinksHere/' + row[0] + '">odkazů</a>)'
+		print "<li>" + row[0] + ' (<a href="https://cs.wikipedia.org/wiki/Special:WhatLinksHere/' + row[0] + '">odkazy</a>)'
+		i += 1
+		if i > 100:
+			break
 else: 
 	for row in data:
 		print "<li>" + row[0] + "</li>"
+		i += 1
+		if i > 100:
+			break
 print "</ol>"
 if more:
 	pass
