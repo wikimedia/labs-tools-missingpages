@@ -23,6 +23,10 @@ QS = os.environ['QUERY_STRING']
 qs = cgi.parse_qs(QS)
 
 title = qs['title'][0]
+if qs['whatlinkshere'][0] == "yes":
+	whatlinkshere = True
+else:
+	whatlinkshere = False
 
 cur = conn.cursor()
 with cur:
@@ -42,10 +46,15 @@ if len(data) > 100:
 	more = True
 else:
 	more = False
+
 i = 0
 print "<ol>"
-for row in data:
-	print "<li>" + row[0] + "</li>"
+if whatlinkshere:
+	for row in data:
+		print "<li>" + row[0] + ' (<a href="https://cs.wikipedia.org/wiki/Special:WhatLinksHere/' + row[0] + '">odkazů</a>)'
+else: 
+	for row in data:
+		print "<li>" + row[0] + "</li>"
 print "</ol>"
 if more:
 	pass
