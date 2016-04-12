@@ -5,6 +5,7 @@
 #TODO: Work with non-ascii chars too
 
 import cgi
+import sys
 import os
 from wmflabs import db
 conn = db.connect("s52741__urbanecmbot")
