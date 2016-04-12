@@ -2,7 +2,6 @@
 #-*- coding: utf-8 -*-
 
 ##############################################
-#TODO: Work with non-ascii chars too
 
 import cgi
 import sys
