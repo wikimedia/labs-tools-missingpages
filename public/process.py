@@ -35,9 +35,8 @@ with cur:
 	cur.execute(sql)
 	data = cur.fetchall()
 
-if len(data) = 0:
-	print '<p>Na zadaný dotaz nebylo nic nalezeno. <a href="https://tools.wmflabs.org/urbanecmbot/missingPages">Vraťte se</a> a zkuste jiný.</p>'
-	sys.exit(0)
+if len(data) == 0:
+	print '<p>Nebyly nalezeny žádné výsledky. <a href="index.html">Vraťte se</a> a zkuste jiný dotaz.'
 
 if len(data) > 100:
 	more = True
