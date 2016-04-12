@@ -5,6 +5,7 @@
 #TODO: Work with non-ascii chars too
 
 import cgi
+import sys
 import os
 from wmflabs import db
 conn = db.connect("s52741__urbanecmbot")
@@ -33,6 +34,11 @@ with cur:
 	sql = 'SELECT title FROM missingPages WHERE title NOT LIKE "%../%" AND title LIKE "' + title + '%" ORDER BY title'
 	cur.execute(sql)
 	data = cur.fetchall()
+
+if len(data) = 0:
+	print '<p>Na zadaný dotaz nebylo nic nalezeno. <a href="https://tools.wmflabs.org/urbanecmbot/missingPages">Vraťte se</a> a zkuste jiný.</p>'
+	sys.exit(0)
+
 if len(data) > 100:
 	more = True
 else:
