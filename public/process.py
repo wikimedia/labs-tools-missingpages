@@ -30,7 +30,7 @@ with cur:
 
 cur = conn.cursor()
 with cur:
-	sql = 'SELECT title FROM missingPages WHERE title LIKE "' + title + '%" ORDER BY title'
+	sql = 'SELECT title FROM missingPages WHERE title NOT LIKE "%../%" AND title LIKE "' + title + '%" ORDER BY title'
 	cur.execute(sql)
 	data = cur.fetchall()
 if len(data) > 100:
