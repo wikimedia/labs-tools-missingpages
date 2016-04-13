@@ -19,14 +19,26 @@ print """
         </head>
         <body>
 """
-QS = os.environ['QUERY_STRING']
-qs = cgi.parse_qs(QS)
-
-title = qs['title'][0]
-if qs['whatlinkshere'][0] == "yes":
-	whatlinkshere = True
+if 'QUERY_STRING' in os.environ:
+	QS = os.environ['QUERY_STRING']
+	qs = cgi.parse_qs(QS)
+	title = qs['title'][0]
+	if qs['whatlinkshere'][0] == "yes":
+		whatlinkshere = True
+	else:
+		whatlinkshere = False
 else:
-	whatlinkshere = False
+	if len(sys.argv) > 1:
+		title = sys.argv[1]
+		if len(sys.argv) == 2:
+			if sys.argv[2] == "yes"
+				whatlinkshere = True
+			else:
+				whatlinkshere = False
+		else:
+			print "Max 2 params"
+	else:
+		print "Při spouštění z příkazové řádky musí být předány parametry"
 
 cur = conn.cursor()
 with cur:
