@@ -7,7 +7,7 @@ import cgi
 import sys
 import os
 from wmflabs import db
-conn = db.connect("s52741__urbanecmbot")
+conn = db.connect("s52964__missingpages_p")
 
 print 'Content-type: text/html\n'
 print """
