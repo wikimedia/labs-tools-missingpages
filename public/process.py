@@ -75,6 +75,10 @@ with cur:
 #If no data fetched, print it and quit
 if len(data) == 0:
 	print '<p>Nebyly nalezeny žádné výsledky. <a href="index.html">Vraťte se</a> a zkuste jiný dotaz.'
+	print """
+	</body>
+	</html>
+	"""
 	quit()
 
 #If we have more than 100 results, set it to var
