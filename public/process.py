@@ -9,7 +9,10 @@ import os
 from wmflabs import db
 conn = db.connect("s52964__missingpages_p")
 
+#Print header
 print 'Content-type: text/html\n'
+
+#Print header of html document
 print """
 <!DOCTYPE html>
 <html lang="cs-cz">
@@ -19,6 +22,8 @@ print """
         </head>
         <body>
 """
+
+#Parse webargs if present
 if 'QUERY_STRING' in os.environ:
 	QS = os.environ['QUERY_STRING']
 	qs = cgi.parse_qs(QS)
@@ -27,6 +32,7 @@ if 'QUERY_STRING' in os.environ:
 		whatlinkshere = True
 	else:
 		whatlinkshere = False
+#Parse args on cmdline or throw error
 else:
 	if len(sys.argv) > 1:
 		title = sys.argv[1]
@@ -52,25 +58,32 @@ else:
 		"""
 		quit()
 
+#Init db conn
 cur = conn.cursor()
+#Set names to utf so we could use non-ascii chars
 with cur:
 	cur.execute("SET NAMES utf8;")
 
+#Init db conn
 cur = conn.cursor()
+#Fetch all missing pages from db
 with cur:
 	sql = 'SELECT title FROM missingPages WHERE title NOT LIKE "%../%" AND title LIKE "' + title + '%" ORDER BY title LIMIT 100'
 	cur.execute(sql)
 	data = cur.fetchall()
 
+#If no data fetched, print it and quit
 if len(data) == 0:
 	print '<p>Nebyly nalezeny žádné výsledky. <a href="index.html">Vraťte se</a> a zkuste jiný dotaz.'
 	quit()
 
+#If we have more than 100 results, set it to var
 if len(data) > 100:
 	more = True
 else:
 	more = False
 
+#Print results
 print "<ol>"
 if whatlinkshere:
 	for row in data:
@@ -79,10 +92,13 @@ else:
 	for row in data:
 		print '<li><a href="https://cs.wikipedia.org/wiki/' + row[0] + '">' + row[0] + '</a></li>'
 print "</ol>"
+
+#If we fetched more than 100 results, do something (see TODO)
 if more:
 	pass
 	#TODO: Some logic for more than 100 rows
 
+#Print end header
 print """
         </body>
 </html>
