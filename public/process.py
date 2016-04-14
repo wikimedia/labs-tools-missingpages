@@ -119,13 +119,25 @@ print "</ol>"
 
 #If we fetched more than 100 results, do something (see TODO)
 if more:
-	if (offset - 100) > 0:
-		pass
+	if (offset - 100) < 0:
+		pprev = False
 	else:
-		pass
+		pprev = True
+	if count <= 100:
+		pnext = False
+	else:
+		pnext = True
 	prevm = '<a href="process.py?title=' + title + '&whatlinkshere=' + qs['whatlinkshere'][0] + '&offset=' + str(offset-100) + '">přechozí</a>'
 	nextm = '<a href="process.py?title=' + title + '&whatlinkshere=' + qs['whatlinkshere'][0] + '&offset=' + str(offset+100) + '">následující</a>'
-	print prevm + "\t" + nextm
+	if pprev:
+		if ppnext:
+			pprint = prevm + "\t" + nextm
+		else:
+			pprint = prevm
+	elif pnext:
+		pprint = nextm
+	else:
+		pass
 
 #Print end header
 print """
