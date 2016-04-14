@@ -133,6 +133,7 @@ if more:
 	if (offset+100)>count:
 		pass
 	else:
+		pprint += "\t"
 		pprint += nextm
 	print pprint
 #Print end header
