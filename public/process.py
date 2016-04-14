@@ -134,6 +134,7 @@ if more:
 		pass
 	else:
 		pprint += nextm
+	print pprint
 #Print end header
 print """
         </body>
