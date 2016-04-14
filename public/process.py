@@ -37,8 +37,18 @@ else:
 				whatlinkshere = False
 		else:
 			print "Max 2 params"
+			print """
+			</body>
+			</html>
+			"""
+			quit()
 	else:
 		print "Při spouštění z příkazové řádky musí být předány parametry"
+		print """
+		</body>
+		</html>
+		"""
+		quit()
 
 cur = conn.cursor()
 with cur:
