@@ -32,17 +32,32 @@ if 'QUERY_STRING' in os.environ:
 		whatlinkshere = True
 	else:
 		whatlinkshere = False
+	try:
+		offset = int(qs['offset'][0])
+	except:
+		print "Špatně nastavený offset, nastavena 0"
+		offset = 0
 #Parse args on cmdline or throw error
 else:
 	if len(sys.argv) > 1:
 		title = sys.argv[1]
-		if len(sys.argv) == 3:
+		if len(sys.argv) > 3:
 			if sys.argv[2] == "yes":
 				whatlinkshere = True
 			else:
 				whatlinkshere = False
-		elif len(sys.argv) > 3:
-			print "Max 2 params"
+			try:
+				offset = int(sys.argv[3])
+			except:
+				print "Špatně nastavený offset, nastavena 0"
+				offset = 0
+		elif len(sys.argv) == 3:
+			if sys.argv[2] == "yes":
+				whatlinkshere = True
+			else:
+				whatlinkshere = False
+		elif len(sys.argv) > 4:
+			print "Max 3 params"
 			print """
 			</body>
 			</html>
