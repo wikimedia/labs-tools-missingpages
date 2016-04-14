@@ -1,5 +1,6 @@
 #Ignore generated files and symlink to dump
 cswiki-*-pages-articles.xml.bz2
+#Ignore generated files
 missl
 MISSLINK.txt
 NLINK.txt
