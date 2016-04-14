@@ -30,18 +30,20 @@ if 'QUERY_STRING' in os.environ:
 else:
 	if len(sys.argv) > 1:
 		title = sys.argv[1]
-		if len(sys.argv) == 2:
+		if len(sys.argv) == 3:
 			if sys.argv[2] == "yes":
 				whatlinkshere = True
 			else:
 				whatlinkshere = False
-		else:
+		elif len(sys.argv) > 3:
 			print "Max 2 params"
 			print """
 			</body>
 			</html>
 			"""
 			quit()
+		else:
+			whatlinkshere = False
 	else:
 		print "Při spouštění z příkazové řádky musí být předány parametry"
 		print """
