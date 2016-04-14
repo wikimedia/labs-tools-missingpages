@@ -39,6 +39,8 @@ if 'QUERY_STRING' in os.environ:
 		offset = 0
 #Parse args on cmdline or throw error
 else:
+	whatlinkshere = False
+	offset = 0
 	if len(sys.argv) > 1:
 		title = sys.argv[1]
 		if len(sys.argv) > 3:
@@ -63,8 +65,6 @@ else:
 			</html>
 			"""
 			quit()
-		else:
-			whatlinkshere = False
 	else:
 		print "Při spouštění z příkazové řádky musí být předány parametry"
 		print """
