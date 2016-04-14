@@ -31,7 +31,7 @@ else:
 	if len(sys.argv) > 1:
 		title = sys.argv[1]
 		if len(sys.argv) == 2:
-			if sys.argv[2] == "yes"
+			if sys.argv[2] == "yes":
 				whatlinkshere = True
 			else:
 				whatlinkshere = False
