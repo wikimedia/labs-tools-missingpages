@@ -117,7 +117,7 @@ else:
 		print '<li><a href="https://cs.wikipedia.org/wiki/' + row[0] + '">' + row[0] + '</a></li>'
 print "</ol>"
 
-#If we fetched more than 100 results, do something (see TODO)
+#If we fetched more than 100 results, print browsing links
 if more:
 	if (offset - 100) > 0:
 		pass
@@ -127,7 +127,7 @@ if more:
 	nextm = '<a href="process.py?title=' + title + '&whatlinkshere=' + qs['whatlinkshere'][0] + '&offset=' + str(offset+100) + '">následující</a>'
 	print prevm + "\t" + nextm
 
-#Print end header
+#Print tail
 print """
         </body>
 </html>
