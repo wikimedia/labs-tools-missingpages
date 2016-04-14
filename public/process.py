@@ -64,6 +64,10 @@ with cur:
 
 if len(data) == 0:
 	print '<p>Nebyly nalezeny žádné výsledky. <a href="index.html">Vraťte se</a> a zkuste jiný dotaz.'
+	print """
+	</body>
+	</html>
+	"""
 	quit()
 
 if len(data) > 100:
