@@ -43,6 +43,7 @@ if 'QUERY_STRING' in os.environ:
 			sql = 'SELECT title FROM missingPages ORDER BY title LIMIT ' + str(offset) + ', 100'
 		else:
 			sql = 'SELECT title FROM missingPages ORDER BY title DESC LIMIT ' + str(offset) + ', 100'
+		print sql
 		nosql = True
 #Parse args on cmdline or throw error
 else:
