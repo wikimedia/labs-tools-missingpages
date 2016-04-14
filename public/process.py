@@ -124,7 +124,7 @@ if more:
 	else:
 		pass
 	prevm = '<a href="process.py?title=' + title + '&whatlinkshere=' + qs['whatlinkshere'][0] + '&offset=' + str(offset-100) + '">přechozí</a>'
-	nextm = '<a href="process.py?title=' + title + '&whatlinkshere=' + qs['whatlinkshere'][0] + '&offset=' + str(offset+100) + '>následující</a>'
+	nextm = '<a href="process.py?title=' + title + '&whatlinkshere=' + qs['whatlinkshere'][0] + '&offset=' + str(offset+100) + '">následující</a>'
 	print prevm + "\t" + nextm
 
 #Print end header
