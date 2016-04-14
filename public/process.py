@@ -117,17 +117,26 @@ else:
 		print '<li><a href="https://cs.wikipedia.org/wiki/' + row[0] + '">' + row[0] + '</a></li>'
 print "</ol>"
 
-#If we fetched more than 100 results, print browsing links
+#If we fetched more than 100 results, do something (see TODO)
 if more:
-	if (offset - 100) > 0:
+	if whatlinkshere:
+		prevm = '<a href="process.py?title=' + title + '&whatlinkshere=yes&offset=' + str(offset-100) + '">přechozí</a>'
+		nextm = '<a href="process.py?title=' + title + '&whatlinkshere=yesoffset=' + str(offset+100) + '">následující</a>'
+	else:
+		prevm = '<a href="process.py?title=' + title + '&whatlinkshere=no&offset=' + str(offset-100) + '">přechozí</a>'
+		nextm = '<a href="process.py?title=' + title + '&whatlinkshere=no&offset=' + str(offset+100) + '">následující</a>'
+	pprint = ""
+	if (offset-100)<0:
 		pass
 	else:
+		pprint += prevm
+	if (offset+100)>count:
 		pass
-	prevm = '<a href="process.py?title=' + title + '&whatlinkshere=' + qs['whatlinkshere'][0] + '&offset=' + str(offset-100) + '">přechozí</a>'
-	nextm = '<a href="process.py?title=' + title + '&whatlinkshere=' + qs['whatlinkshere'][0] + '&offset=' + str(offset+100) + '">následující</a>'
-	print prevm + "\t" + nextm
-
-#Print tail
+	else:
+		pprint += "\t"
+		pprint += nextm
+	print pprint
+#Print end header
 print """
         </body>
 </html>
