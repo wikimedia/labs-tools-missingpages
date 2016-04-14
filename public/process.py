@@ -97,7 +97,12 @@ if len(data) == 0:
 	quit()
 
 #If we have more than 100 results, set it to var
-if len(data) > 100:
+cur = conn.cursor()
+with cur:
+	sql = 'SELECT COUNT(*) FROM missingPages;'
+	cur.execute(sql)
+	count = cur.fetchall()[0]
+if count > 100:
 	more = True
 else:
 	more = False
