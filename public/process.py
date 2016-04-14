@@ -83,7 +83,7 @@ with cur:
 cur = conn.cursor()
 #Fetch all missing pages from db
 with cur:
-	sql = 'SELECT title FROM missingPages WHERE title NOT LIKE "%../%" AND title LIKE "' + title + '%" ORDER BY title LIMIT 100'
+	sql = 'SELECT title FROM missingPages WHERE title NOT LIKE "%../%" AND title LIKE "' + title + '%" ORDER BY title LIMIT ' + offset + ', 100'
 	cur.execute(sql)
 	data = cur.fetchall()
 
