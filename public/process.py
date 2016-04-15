@@ -45,7 +45,6 @@ if 'QUERY_STRING' in os.environ:
 		elif qs['special'][0] == 'last':
 			sql = 'SELECT title FROM missingPages ORDER BY title DESC LIMIT ' + str(offset) + ', 100'
 			reverseMsg = True
-		print sql
 		nosql = True
 #Parse args on cmdline or throw error
 else:
