@@ -42,10 +42,11 @@ if 'QUERY_STRING' in os.environ:
 	if 'special' in qs:
 		if qs['special'][0] == 'first':
 			sql = 'SELECT title FROM missingPages ORDER BY title LIMIT ' + str(offset) + ', 100'
+			nosql = True
 		elif qs['special'][0] == 'last':
 			sql = 'SELECT title FROM missingPages ORDER BY title DESC LIMIT ' + str(offset) + ', 100'
 			reverseMsg = True
-		nosql = True
+			nosql = True
 #Parse args on cmdline or throw error
 else:
 	whatlinkshere = False
