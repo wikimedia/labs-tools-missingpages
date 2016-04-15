@@ -47,6 +47,13 @@ if 'QUERY_STRING' in os.environ:
 			sql = 'SELECT title FROM missingPages ORDER BY title DESC LIMIT ' + str(offset) + ', 100'
 			reverseMsg = True
 			nosql = True
+		else:
+			print "<p>Nepodporovaná hodnota speciálního parametru</p>"
+			print """
+			</body>
+			</html>
+			"""
+			quit()
 #Parse args on cmdline or throw error
 else:
 	whatlinkshere = False
