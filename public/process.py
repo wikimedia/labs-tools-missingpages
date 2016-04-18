@@ -25,6 +25,8 @@ print """
 
 #Parse webargs if present
 if 'QUERY_STRING' in os.environ:
+	nosql = False
+	reverseMsg = False
 	QS = os.environ['QUERY_STRING']
 	qs = cgi.parse_qs(QS)
 	title = qs['title'][0]
@@ -37,6 +39,21 @@ if 'QUERY_STRING' in os.environ:
 	except:
 		print "Špatně nastavený offset, nastavena 0"
 		offset = 0
+	if 'special' in qs:
+		if qs['special'][0] == 'first':
+			sql = 'SELECT title FROM missingPages ORDER BY title LIMIT ' + str(offset) + ', 100'
+			nosql = True
+		elif qs['special'][0] == 'last':
+			sql = 'SELECT title FROM missingPages ORDER BY title DESC LIMIT ' + str(offset) + ', 100'
+			reverseMsg = True
+			nosql = True
+		else:
+			print "<p>Nepodporovaná hodnota speciálního parametru</p>"
+			print """
+			</body>
+			</html>
+			"""
+			quit()
 #Parse args on cmdline or throw error
 else:
 	whatlinkshere = False
@@ -83,7 +100,10 @@ with cur:
 cur = conn.cursor()
 #Fetch all missing pages from db
 with cur:
-	sql = 'SELECT title FROM missingPages WHERE title NOT LIKE "%../%" AND title LIKE "' + title + '%" ORDER BY title LIMIT ' + str(offset) + ', 100'
+	if nosql:
+		pass
+	else:
+		sql = 'SELECT title FROM missingPages WHERE title NOT LIKE "%../%" AND title LIKE "' + title + '%" ORDER BY title LIMIT ' + str(offset) + ', 100'
 	cur.execute(sql)
 	data = cur.fetchall()
 
@@ -119,12 +139,20 @@ print "</ol>"
 
 #If we fetched more than 100 results, do something (see TODO)
 if more:
-	if whatlinkshere:
-		prevm = '<a href="process.py?title=' + title + '&whatlinkshere=yes&offset=' + str(offset-100) + '">přechozí</a>'
-		nextm = '<a href="process.py?title=' + title + '&whatlinkshere=yesoffset=' + str(offset+100) + '">následující</a>'
+	if reverseMsg:
+		if whatlinkshere:
+			prevm = '<a href="process.py?title=' + title + '&whatlinkshere=yes&offset=' + str(offset-100) + '">následující</a>'
+			nextm = '<a href="process.py?title=' + title + '&whatlinkshere=yesoffset=' + str(offset+100) + '">předchozí</a>'
+		else:
+			prevm = '<a href="process.py?title=' + title + '&whatlinkshere=no&offset=' + str(offset-100) + '">následující</a>'
+			nextm = '<a href="process.py?title=' + title + '&whatlinkshere=no&offset=' + str(offset+100) + '">předchozí</a>'
 	else:
-		prevm = '<a href="process.py?title=' + title + '&whatlinkshere=no&offset=' + str(offset-100) + '">přechozí</a>'
-		nextm = '<a href="process.py?title=' + title + '&whatlinkshere=no&offset=' + str(offset+100) + '">následující</a>'
+		if whatlinkshere:
+			prevm = '<a href="process.py?title=' + title + '&whatlinkshere=yes&offset=' + str(offset-100) + '">předchozí</a>'
+			nextm = '<a href="process.py?title=' + title + '&whatlinkshere=yesoffset=' + str(offset+100) + '">následující</a>'
+		else:
+			prevm = '<a href="process.py?title=' + title + '&whatlinkshere=no&offset=' + str(offset-100) + '">předchozí</a>'
+			nextm = '<a href="process.py?title=' + title + '&whatlinkshere=no&offset=' + str(offset+100) + '">následující</a>'
 	pprint = ""
 	if (offset-100)<0:
 		pass
