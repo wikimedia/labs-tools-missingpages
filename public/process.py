@@ -79,12 +79,8 @@ else:
 			else:
 				whatlinkshere = False
 		elif len(sys.argv) > 4:
-			print "Max 3 params"
-			print """
-			</body>
-			</html>
-			"""
-			quit()
+			print "<p>Maximálně 5 parametrů</p>"
+			endHeader()
 	else:
 		print "Při spouštění z příkazové řádky musí být předány parametry"
 		print """
