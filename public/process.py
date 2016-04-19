@@ -121,7 +121,7 @@ else:
 	more = False
 
 #Print results
-print "<ol>"
+print '<ol start="'+str(offset+1)+'">'
 if whatlinkshere:
 	for row in data:
 		print '<li><a href="https://cs.wikipedia.org/wiki/' + row[0] + '">' + row[0] + '</a> (<a href="https://cs.wikipedia.org/wiki/Special:WhatLinksHere/' + row[0] + '">odkazy</a>)</li>'
