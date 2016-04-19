@@ -82,12 +82,8 @@ else:
 			print "<p>Maximálně 5 parametrů</p>"
 			endHeader()
 	else:
-		print "Při spouštění z příkazové řádky musí být předány parametry"
-		print """
-		</body>
-		</html>
-		"""
-		quit()
+		print "<p>Při spouštění z příkazové řádky musí být předány parametry</p>"
+		endHeader()
 
 #Init db conn
 cur = conn.cursor()
