@@ -22,7 +22,14 @@ print """
         </head>
         <body>
 """
-
+###############FUNCTIONS######################
+#Print end header
+def endHeader():
+	print """
+        </body>
+	</html>
+	"""
+	quit()
 #Parse webargs if present
 if 'QUERY_STRING' in os.environ:
 	nosql = False
@@ -49,11 +56,7 @@ if 'QUERY_STRING' in os.environ:
 			nosql = True
 		else:
 			print "<p>Nepodporovaná hodnota speciálního parametru</p>"
-			print """
-			</body>
-			</html>
-			"""
-			quit()
+			endHeader()
 #Parse args on cmdline or throw error
 else:
 	whatlinkshere = False
@@ -164,8 +167,3 @@ if more:
 		pprint += "\t"
 		pprint += nextm
 	print pprint
-#Print end header
-print """
-        </body>
-</html>
-"""
