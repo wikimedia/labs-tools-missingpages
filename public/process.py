@@ -22,7 +22,14 @@ print """
         </head>
         <body>
 """
-
+###############FUNCTIONS######################
+#Print end header
+def endHeader():
+	print """
+        </body>
+	</html>
+	"""
+	quit()
 #Parse webargs if present
 if 'QUERY_STRING' in os.environ:
 	nosql = False
@@ -49,11 +56,7 @@ if 'QUERY_STRING' in os.environ:
 			nosql = True
 		else:
 			print "<p>Nepodporovaná hodnota speciálního parametru</p>"
-			print """
-			</body>
-			</html>
-			"""
-			quit()
+			endHeader()
 #Parse args on cmdline or throw error
 else:
 	whatlinkshere = False
@@ -76,19 +79,11 @@ else:
 			else:
 				whatlinkshere = False
 		elif len(sys.argv) > 4:
-			print "Max 3 params"
-			print """
-			</body>
-			</html>
-			"""
-			quit()
+			print "<p>Maximálně 5 parametrů</p>"
+			endHeader()
 	else:
-		print "Při spouštění z příkazové řádky musí být předány parametry"
-		print """
-		</body>
-		</html>
-		"""
-		quit()
+		print "<p>Při spouštění z příkazové řádky musí být předány parametry</p>"
+		endHeader()
 
 #Init db conn
 cur = conn.cursor()
@@ -100,9 +95,7 @@ with cur:
 cur = conn.cursor()
 #Fetch all missing pages from db
 with cur:
-	if nosql:
-		pass
-	else:
+	if not nosql:
 		sql = 'SELECT title FROM missingPages WHERE title NOT LIKE "%../%" AND title LIKE "' + title + '%" ORDER BY title LIMIT ' + str(offset) + ', 100'
 	cur.execute(sql)
 	data = cur.fetchall()
@@ -164,8 +157,4 @@ if more:
 		pprint += "\t"
 		pprint += nextm
 	print pprint
-#Print end header
-print """
-        </body>
-</html>
-"""
+endHeader()
