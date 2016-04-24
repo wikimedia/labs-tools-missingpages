@@ -96,7 +96,7 @@ cur = conn.cursor()
 #Fetch all missing pages from db
 with cur:
 	if not nosql:
-		sql = 'SELECT title FROM missingPages WHERE title NOT LIKE "%../%" AND title LIKE "' + title + '%" ORDER BY title AND title NOT LIKE "%(copyvio)" LIMIT ' + str(offset) + ', 100'
+		sql = 'SELECT title FROM missingPages WHERE title NOT LIKE "%../%" AND title LIKE "' + title + '%" ORDER BY title LIMIT ' + str(offset) + ', 100'
 	cur.execute(sql)
 	data = cur.fetchall()
 
