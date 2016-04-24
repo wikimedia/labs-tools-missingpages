@@ -24,7 +24,7 @@ print """
 """
 ###############FUNCTIONS######################
 #Print end header
-def endHeader():
+def tail():
 	print """
         </body>
 	</html>
@@ -56,7 +56,7 @@ if 'QUERY_STRING' in os.environ:
 			nosql = True
 		else:
 			print "<p>Nepodporovaná hodnota speciálního parametru</p>"
-			endHeader()
+			tail()
 #Parse args on cmdline or throw error
 else:
 	whatlinkshere = False
@@ -80,10 +80,10 @@ else:
 				whatlinkshere = False
 		elif len(sys.argv) > 4:
 			print "<p>Maximálně 5 parametrů</p>"
-			endHeader()
+			tail()
 	else:
 		print "<p>Při spouštění z příkazové řádky musí být předány parametry</p>"
-		endHeader()
+		tail()
 
 #Init db conn
 cur = conn.cursor()
@@ -157,4 +157,4 @@ if more:
 		pprint += "\t"
 		pprint += nextm
 	print pprint
-endHeader()
+tail()
