@@ -21,6 +21,7 @@ print """
                 <title>Chybějící stránky</title>
         </head>
         <body>
+		<p><a href="index.html">Zpět</a>
 """
 ###############FUNCTIONS######################
 #Print end header
