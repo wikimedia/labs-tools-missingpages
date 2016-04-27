@@ -33,7 +33,7 @@ def tail():
 #Parse webargs if present
 if 'QUERY_STRING' in os.environ:
 	nosql = False
-	reverseMsg = False
+	last = False
 	QS = os.environ['QUERY_STRING']
 	qs = cgi.parse_qs(QS)
 	title = qs['title'][0]
@@ -52,8 +52,8 @@ if 'QUERY_STRING' in os.environ:
 			nosql = True
 		elif qs['special'][0] == 'last':
 			sql = 'SELECT title FROM missingPages ORDER BY title DESC LIMIT ' + str(offset) + ', 100'
-			reverseMsg = True
 			nosql = True
+			last = True
 		else:
 			print "<p>Nepodporovaná hodnota speciálního parametru</p>"
 			tail()
@@ -132,13 +132,13 @@ print "</ol>"
 
 #If we fetched more than 100 results, do something (see TODO)
 if more:
-	if reverseMsg:
+	if last:
 		if whatlinkshere:
-			prevm = '<a href="process.py?title=' + title + '&whatlinkshere=yes&offset=' + str(offset-100) + '">následující</a>'
-			nextm = '<a href="process.py?title=' + title + '&whatlinkshere=yesoffset=' + str(offset+100) + '">předchozí</a>'
+			prevm = '<a href="process.py?title=' + title + '&special=last&whatlinkshere=yes&offset=' + str(offset-100) + '">následující</a>'
+			nextm = '<a href="process.py?title=' + title + '&special=last&whatlinkshere=yesoffset=' + str(offset+100) + '">předchozí</a>'
 		else:
-			prevm = '<a href="process.py?title=' + title + '&whatlinkshere=no&offset=' + str(offset-100) + '">následující</a>'
-			nextm = '<a href="process.py?title=' + title + '&whatlinkshere=no&offset=' + str(offset+100) + '">předchozí</a>'
+			prevm = '<a href="process.py?title=' + title + '&special=last&whatlinkshere=no&offset=' + str(offset-100) + '">následující</a>'
+			nextm = '<a href="process.py?title=' + title + '&special=last&whatlinkshere=no&offset=' + str(offset+100) + '">předchozí</a>'
 	else:
 		if whatlinkshere:
 			prevm = '<a href="process.py?title=' + title + '&whatlinkshere=yes&offset=' + str(offset-100) + '">předchozí</a>'
