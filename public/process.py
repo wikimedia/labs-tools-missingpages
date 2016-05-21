@@ -152,7 +152,7 @@ if more:
 	else:
 		if whatlinkshere:
 			prevm = '<a href="process.py?title=' + escape(title) + '&whatlinkshere=yes&offset=' + str(offset-100) + '">předchozí</a>'
-			nextm = '<a href="process.py?title=' + escape(title) + '&whatlinkshere=yesoffset=' + str(offset+100) + '">následující</a>'
+			nextm = '<a href="process.py?title=' + escape(title) + '&whatlinkshere=yes&soffset=' + str(offset+100) + '">následující</a>'
 		else:
 			prevm = '<a href="process.py?title=' + escape(title) + '&whatlinkshere=no&offset=' + str(offset-100) + '">předchozí</a>'
 			nextm = '<a href="process.py?title=' + escape(title) + '&whatlinkshere=no&offset=' + str(offset+100) + '">následující</a>'
