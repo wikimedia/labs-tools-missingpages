@@ -33,7 +33,7 @@ def tail():
 	quit()
 def escape(html):
 	"""Returns the given HTML with ampersands, quotes and carets encoded."""
-	return mark_safe(force_unicode(html).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace("'", '&#39;'))
+	return cgi.escape('"&')
 
 #Parse webargs if present
 if 'QUERY_STRING' in os.environ:
