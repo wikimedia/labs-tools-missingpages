@@ -3,6 +3,7 @@
 
 ##############################################
 
+from xml.sax.saxutils import escape as html_escape
 import cgi
 import sys
 import os
@@ -33,7 +34,11 @@ def tail():
 	quit()
 def escape(html):
 	"""Returns the given HTML with ampersands, quotes and carets encoded."""
-	return cgi.escape(html)
+	html_escape_table = {
+		'"': "&quot;",
+		"'": "&apos;"
+	}
+	return html_escape(html, html_escape_table)
 
 #Parse webargs if present
 if 'QUERY_STRING' in os.environ:
