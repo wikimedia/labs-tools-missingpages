@@ -1,3 +1,8 @@
+create table tmp
+(
+title varchar(256)
+)
+;
 INSERT INTO tmp
 select pl_title as title_to from cswiki_p.pagelinks left join cswiki_p.page on (pl_from=page_id)
 where pl_namespace=0 and (page_namespace in (0, 2, 14, 100)
