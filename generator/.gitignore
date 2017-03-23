@@ -8,5 +8,6 @@ NLINK.txt
 REDIRLIST.txt
 ROZCLIST.txt
 list.txt
+date.txt
 #Ignore database dump
 *.sql
