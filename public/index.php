@@ -22,6 +22,6 @@
 			<li><a href="process.py?title=a&offset=0&whatlinkshere=yes&special=last">Poslední výpis s odkazy na Speciální:Odkazuje sem</a></li>
 		</ol>
 		<br/>
-		<p>Program využívá dat z 23.&nbsp;března&nbsp;2017. </p>
+		<p>Program využívá dat z <?php echo(file_get_contents("/data/project/missingpages/missingpages/public/date.txt")); ?> </p>
 	</body>
 </html>
