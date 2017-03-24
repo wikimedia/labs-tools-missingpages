@@ -10,3 +10,5 @@ sql local < toLocal.sql
 rm ~/tmp/dump.sql
 #Remove data on relica
 sql cswiki < cleanUp.sql
+#Rename the tables
+sql local < rename.sh
