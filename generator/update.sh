@@ -12,3 +12,5 @@ rm ~/tmp/dump.sql
 sql cswiki < cleanUp.sql
 #Rename the tables
 sql local < rename.sh
+#Actualize date
+date '+%d. %m %Y' > /data/project/missingpages/missingpages/public/date.txt
