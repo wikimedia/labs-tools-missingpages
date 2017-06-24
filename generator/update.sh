@@ -11,6 +11,6 @@ rm ~/tmp/dump.sql
 #Remove data on relica
 sql cswiki < cleanUp.sql
 #Rename the tables
-sql local < rename.sh
+sql local < rename.sql
 #Actualize date
 date '+%d. %m %Y' > /data/project/missingpages/missingpages/public/date.txt
