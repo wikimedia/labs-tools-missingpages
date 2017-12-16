@@ -16,6 +16,6 @@ with conn.cursor() as cur:
 	data = cur.fetchall()
 
 with open('data.csv', 'wb') as csvfile:
-	writer = csv.writer(csvfile, delimiter=';', quoting_char='"', quoting=csv.QUOTING_MINIMAL)
+	writer = csv.writer(csvfile, delimiter=';', quoting_char='"', quoting=csv.QUOTE_MINIMAL)
 	for row in data:
 		writer.writerow(row)
