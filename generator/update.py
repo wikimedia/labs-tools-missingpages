@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
-import csv
 from wmflabs import db
-
 
 # Get the data from database
 conn = db.connect('cswiki')
@@ -19,3 +17,18 @@ with open('data.csv', 'wb') as csvfile:
 	writer = csv.writer(csvfile, delimiter=';', quoting_char='"', quoting=csv.QUOTE_MINIMAL)
 	for row in data:
 		writer.writerow(row)
+
+# Store the data into tools-db
+conn = db.connect('s52964__missingpages_p')
+with conn.cursor() as cur:
+	sql = 'drop table if exists missingPagesNew;'
+	cur.execute(sql)
+
+with conn.cursor() as cur:
+	sql = 'create table missingPagesNew(title varchar(256));'
+	cur.execute(sql)
+
+for row in data:
+	with conn.cursor() as cur:
+		sql = 'insert into missingPagesNew(title) values(' + row[0] + ');'
+		cur.execute(sql)
