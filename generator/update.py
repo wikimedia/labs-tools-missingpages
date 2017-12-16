@@ -24,6 +24,10 @@ with conn.cursor() as cur:
 	sql = 'create table missingPagesNew(title varchar(256));'
 	cur.execute(sql)
 
+with conn.cursor() as cur:
+	sql = 'set charset utf8;'
+	cur.execute(sql)
+
 for row in data:
 	with conn.cursor() as cur:
 		sql = 'insert into missingPagesNew (title) values("' + row[0].replace('"', '\\"') + '");'
