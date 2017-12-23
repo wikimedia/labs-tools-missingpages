@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
+import datetime
 from wmflabs import db
 
 # Get the data from database
@@ -32,3 +33,19 @@ for row in data:
 	with conn.cursor() as cur:
 		sql = 'insert into missingPagesNew (title) values("' + row[0].replace('"', '\\"') + '");'
 		cur.execute(sql)
+
+with conn.cursor() as cur:
+	sql = 'drop table if exists missingPagesOld'
+	cur.execute(sql)
+
+with conn.cursor() as cur:
+	sql = 'alter table misingPages rename to missingPagesOld'
+	cur.execute(sql)
+
+with conn.cursor() as cur:
+	sql = 'alter talbe missingPagesNew rename to missingPages'
+	cur.execute(sql)
+
+day = datetime.date.today().strftime('%d. %m. %Y')
+with open('/data/project/missingpages/missingpages/public/date.txt', 'w') as f:
+	f.write(day)
