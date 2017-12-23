@@ -31,5 +31,4 @@ with conn.cursor() as cur:
 for row in data:
 	with conn.cursor() as cur:
 		sql = 'insert into missingPagesNew (title) values("' + row[0].replace('"', '\\"') + '");'
-		print sql
 		cur.execute(sql)
