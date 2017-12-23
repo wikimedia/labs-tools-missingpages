@@ -39,7 +39,7 @@ with conn.cursor() as cur:
 	cur.execute(sql)
 
 with conn.cursor() as cur:
-	sql = 'alter table misingPages rename to missingPagesOld'
+	sql = 'alter table missingPages rename to missingPagesOld'
 	cur.execute(sql)
 
 with conn.cursor() as cur:
