@@ -43,7 +43,7 @@ with conn.cursor() as cur:
 	cur.execute(sql)
 
 with conn.cursor() as cur:
-	sql = 'alter talbe missingPagesNew rename to missingPages'
+	sql = 'alter table missingPagesNew rename to missingPages'
 	cur.execute(sql)
 
 day = datetime.date.today().strftime('%d. %m. %Y')
