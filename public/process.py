@@ -3,7 +3,6 @@
 
 ##############################################
 
-from xml.sax.saxutils import escape as html_escape
 import cgi
 import sys
 import os
@@ -32,13 +31,6 @@ def tail():
 	</html>
 	"""
 	quit()
-def escape(html):
-	"""Returns the given HTML with ampersands, quotes and carets encoded."""
-	html_escape_table = {
-		'"': "&quot;",
-		"'": "&apos;"
-	}
-	return html_escape(html, html_escape_table)
 
 #Parse webargs if present
 if 'QUERY_STRING' in os.environ:
@@ -99,7 +91,7 @@ else:
 cur = conn.cursor()
 #Set names to utf so we could use non-ascii chars
 with cur:
-	cur.execute("SET NAMES utf8;")
+	cur.execute("SET NAMES utf8")
 
 #Init db conn
 cur = conn.cursor()
@@ -134,28 +126,30 @@ else:
 print '<ol start="'+str(offset+1)+'">'
 if whatlinkshere:
 	for row in data:
-		print '<li><a href="https://cs.wikipedia.org/wiki/' + escape(row[0]) + '">' + escape(row[0]) + '</a> (<a href="https://cs.wikipedia.org/wiki/Special:WhatLinksHere/' + escape(row[0]) + '">odkazy</a>)</li>'
+		item = row[0].encode('latin1')
+		print '<li><a href="https://cs.wikipedia.org/wiki/' + item + '">' + item + '</a> (<a href="https://cs.wikipedia.org/wiki/Special:WhatLinksHere/' + item + '">odkazy</a>)</li>'
 else: 
 	for row in data:
-		print '<li><a href="https://cs.wikipedia.org/wiki/' + escape(row[0]) + '">' + escape(row[0]) + '</a></li>'
+		item = row[0].encode('latin1')
+		print '<li><a href="https://cs.wikipedia.org/wiki/' + item + '">' + item + '</a></li>'
 print "</ol>"
 
 #If we fetched more than 100 results, do something (see TODO)
 if more:
 	if last:
 		if whatlinkshere:
-			prevm = '<a href="process.py?title=' + escape(title) + '&special=last&whatlinkshere=yes&offset=' + str(offset-100) + '">následující</a>'
-			nextm = '<a href="process.py?title=' + escape(title) + '&special=last&whatlinkshere=yes&offset=' + str(offset+100) + '">předchozí</a>'
+			prevm = '<a href="process.py?title=' + title + '&special=last&whatlinkshere=yes&offset=' + str(offset-100) + '">následující</a>'
+			nextm = '<a href="process.py?title=' + title + '&special=last&whatlinkshere=yes&offset=' + str(offset+100) + '">předchozí</a>'
 		else:
-			prevm = '<a href="process.py?title=' + escape(title) + '&special=last&whatlinkshere=no&offset=' + str(offset-100) + '">následující</a>'
-			nextm = '<a href="process.py?title=' + escape(title) + '&special=last&whatlinkshere=no&offset=' + str(offset+100) + '">předchozí</a>'
+			prevm = '<a href="process.py?title=' + title + '&special=last&whatlinkshere=no&offset=' + str(offset-100) + '">následující</a>'
+			nextm = '<a href="process.py?title=' + title + '&special=last&whatlinkshere=no&offset=' + str(offset+100) + '">předchozí</a>'
 	else:
 		if whatlinkshere:
-			prevm = '<a href="process.py?title=' + escape(title) + '&whatlinkshere=yes&offset=' + str(offset-100) + '">předchozí</a>'
-			nextm = '<a href="process.py?title=' + escape(title) + '&whatlinkshere=yes&soffset=' + str(offset+100) + '">následující</a>'
+			prevm = '<a href="process.py?title=' + title + '&whatlinkshere=yes&offset=' + str(offset-100) + '">předchozí</a>'
+			nextm = '<a href="process.py?title=' + title + '&whatlinkshere=yes&soffset=' + str(offset+100) + '">následující</a>'
 		else:
-			prevm = '<a href="process.py?title=' + escape(title) + '&whatlinkshere=no&offset=' + str(offset-100) + '">předchozí</a>'
-			nextm = '<a href="process.py?title=' + escape(title) + '&whatlinkshere=no&offset=' + str(offset+100) + '">následující</a>'
+			prevm = '<a href="process.py?title=' + title + '&whatlinkshere=no&offset=' + str(offset-100) + '">předchozí</a>'
+			nextm = '<a href="process.py?title=' + title + '&whatlinkshere=no&offset=' + str(offset+100) + '">následující</a>'
 	pprint = ""
 	if (offset-100)<0:
 		pass
