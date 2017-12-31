@@ -22,7 +22,7 @@ print """
                 <title>Chybějící stránky</title>
         </head>
         <body>
-		<p><a href="index.html">Zpět</a>
+		<p><a href="index.php">Zpět</a>
 """
 ###############FUNCTIONS######################
 #Print end header
@@ -112,7 +112,7 @@ with cur:
 
 #If no data fetched, print it and quit
 if len(data) == 0:
-	print '<p>Nebyly nalezeny žádné výsledky. <a href="index.html">Vraťte se</a> a zkuste jiný dotaz.'
+	print '<p>Nebyly nalezeny žádné výsledky. <a href="index.php">Vraťte se</a> a zkuste jiný dotaz.'
 	print """
 	</body>
 	</html>
